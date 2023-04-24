@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react'
+import Login from './component/Login'
+import Logout from './component/Logout'
 
-function App() {
+const App = () => {
+  const [stateAuth, setStateAuth] = useState()
+  const response = (res) => {
+    setStateAuth(res)
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='d-flex justify-content-center align-items-center flex-column'
+      style={{ height: "100vh" }}
+    >
+      {!stateAuth ?
+        <Login response={response} />
+        :
+        <div className='d-flex justify-content-center align-items-center flex-column'>
+          <img src={stateAuth.profileObj.imageUrl} />
+          <h5>{stateAuth.profileObj.name}</h5>
+          <p>{stateAuth.profileObj.email}</p>
+        <Logout response={response} />
+        </div>
+      }
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
