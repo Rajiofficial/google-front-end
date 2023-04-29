@@ -1,27 +1,41 @@
 import React, { useState } from 'react'
 import Login from './component/Login'
 import Logout from './component/Logout'
-
+import { GoogleLogin } from '@react-oauth/google';
 const App = () => {
-  const [stateAuth, setStateAuth] = useState()
-  const response = (res) => {
-    setStateAuth(res)
-  }
+  // const [stateAuth, setStateAuth] = useState()
+  // const response = (res) => {
+  //   setStateAuth(res)
+  // }
   return (
-    <div className='d-flex justify-content-center align-items-center flex-column'
-      style={{ height: "100vh" }}
-    >
-      {!stateAuth ?
-        <Login response={response} />
-        :
-        <div className='d-flex justify-content-center align-items-center flex-column'>
-          <img src={stateAuth.profileObj.imageUrl} />
-          <h5>{stateAuth.profileObj.name}</h5>
-          <p>{stateAuth.profileObj.email}</p>
-        <Logout response={response} />
-        </div>
-      }
-    </div>
+<>
+<GoogleLogin
+  onSuccess={credentialResponse => {
+    console.log(credentialResponse);
+    console.log(credentialResponse.profileObject)
+  }}
+  onError={() => {
+    console.log('Login Failed');
+  }}
+/>
+
+
+</>
+
+    // <div className='d-flex justify-content-center align-items-center flex-column'
+    //   style={{ height: "100vh" }}
+    // >
+    //   {!stateAuth ?
+    //     <Login response={response} />
+    //     :
+    //     <div className='d-flex justify-content-center align-items-center flex-column'>
+    //       <img src={stateAuth.profileObj.imageUrl} />
+    //       <h5>{stateAuth.profileObj.name}</h5>
+    //       <p>{stateAuth.profileObj.email}</p>
+    //     <Logout response={response} />
+    //     </div>
+    //   }
+    // </div>
   )
 }
 
