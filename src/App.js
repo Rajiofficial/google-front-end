@@ -9,16 +9,7 @@ const App = () => {
   // }
   return (
 <>
-<GoogleLogin
-  onSuccess={credentialResponse => {
-    console.log(credentialResponse);
-    console.log(credentialResponse.profileObject)
-  }}
-  onError={() => {
-    console.log('Login Failed');
-  }}
-/>
-
+<Login/>
 
 </>
 
